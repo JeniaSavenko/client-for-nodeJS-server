@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700');
+
+html, body *{
+  font:{
+    family: 'Raleway', sans-serif;
+    size: 10px;
+  }
+}
+
+button[class*="MuiButton"]{
+  span[class*="MuiButton-label"]{
+    font:{size:1.6rem;weight:300}
+  }
+}
+
+.link{
+  text-decoration: none;
+}
+.txt{
+  &-white{
+    color: #fff;
+  }
+}
+.f{
+  &w{
+    &-b{
+      font-weight: bold;
+    }
+  }
+}
+
+.header {
+  display: flex; justify-content: space-between;
+  .link{font-size: 1.6rem;}
+}
+.App-wrap{
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 68px);
+  align-items: center;
+  justify-content: center;
+}
+.App-logo {
+  background-image: url('640px-React-icon.svg.png');
+  animation: App-logo-spin infinite 20s linear;
+  height: 15rem;
+  width: 15rem;
+  pointer-events: none;
+  background-position: center;
+  background-size: cover;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.post{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 .4rem 0 #aaa;
+  height: calc(100% - 1rem);
+  margin:5px;
+  text-decoration: none;
+  p{margin:0;}
+  &__head, &__body{
+    padding: 1rem 2rem;
+  }
+  &__title{
+    font:{
+      size:1.8rem
+    }
+    color: #111;
+    max-height: 5.9rem;
+    overflow: hidden;
+    &:first-letter{
+      text:{
+        transform: uppercase;
+      }
+      font:{
+        size:3rem;
+        weight: 700;
+      }
+      color:#3f51b5;
+    }
+  }
+  &__body{
+    font:{
+      size: 1.4rem;
+    }
+    color: #555;
+    flex-grow: 1;
+    display: flex;
+   p{
+     max-height: 10rem;
+     overflow: hidden;
+     font-size: 1.4rem;
+   }
+  }
+  &__footer{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 2rem 1rem 2rem;
+    button{
+      //border-radius: 50%;
+      width: 4rem;
+      height:4rem;
+      padding:0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: auto;
+      margin-left:1.5rem;
+    }
+  }
+}
+
+[class*="MuiFormControl"]{
+  width: 100%;
+  label, textarea, input {
+    font-size: 1.4rem;
+  }
+  textarea{
+    line-height: 1.5;
+  }
+  [class*="focused"]{
+    legend{min-width: 5rem!important;}
+  }
+}
