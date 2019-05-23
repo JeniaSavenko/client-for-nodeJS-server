@@ -7,6 +7,7 @@ export const HANDLE_TEXT_CHANGE = 'HANDLE_TEXT_CHANGE';
 export const EDIT_SAVE_POST = 'EDIT_SAVE_POST';
 export const SAVE_POST = 'SAVE_POST';
 export const POST_NOTES_SUCCESS = 'POST_NOTES_SUCCESS';
+export const DELETE_NOTES_SUCCESS = 'DELETE_NOTES_SUCCESS';
 
 export const getPosts = () => ({
   type: GET_POSTS,
@@ -20,8 +21,8 @@ export const postPosts = (text, title) => ({
 
 export function rmPost(item){
   return{
-    type: DELETE_POST,
-    item: item
+    type: DELETE_NOTES_SUCCESS,
+    item
   }
 }
 export function handleEditMode(itemId){

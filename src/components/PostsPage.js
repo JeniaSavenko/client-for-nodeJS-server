@@ -17,7 +17,7 @@ class PostsPage extends React.Component{
             match={match}
             index={i}
             editMode={item.editMode}
-            onDelete={() => deletePostAction(item.id)}
+            onDelete={() => deletePostAction(item._id)}
             handleEditMode={()=>handleEditModeAction(item.id)}
             key={i}
             body={item.text}
