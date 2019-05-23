@@ -8,15 +8,12 @@ import Paper from "@material-ui/core/Paper";
 
 class PostCreateForm extends React.Component {
   render() {
-    const {post, createPost, setTitleAction} = this.props;
+    const {post, setTitleAction} = this.props;
     const setTitle = event => {
       this.setState({title: event.target.value})
     };
     const setText = event => {
       this.setState({text: event.target.value})
-    };
-    const setId = event => {
-      this.setState({id: event.target.value})
     };
     return (
       <Grid container>
@@ -46,17 +43,6 @@ class PostCreateForm extends React.Component {
                 margin="normal"
                 variant="outlined"
               />
-            </Grid>
-            <Grid item xs={6}>
-              <p>{}</p>
-              {/*<TextField*/}
-                {/*id={"postTitle"}*/}
-                {/*label="Post Title"*/}
-                {/*value={title}*/}
-                {/*onChange={(value) => setId(value)}*/}
-                {/*margin="normal"*/}
-                {/*variant="outlined"*/}
-              {/*/>*/}
             </Grid>
             <Button style={{marginTop:'2rem', width:'100%'}} variant="contained" color="primary" onClick={()=>setTitleAction(this.state.title, this.state.text)}>Add New Post</Button>
           </Paper>

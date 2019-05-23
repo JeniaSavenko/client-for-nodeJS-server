@@ -31,7 +31,7 @@ function* postPosts(action) {
         const response = yield call(postNotes, item);
         if (response) {
             yield put({type: POST_NOTES_SUCCESS});
-            yield put({type :GET_POSTS})
+            yield put({type: GET_POSTS})
         }
     } catch (err) {
         // I need the error data here ..

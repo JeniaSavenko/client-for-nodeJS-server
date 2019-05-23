@@ -65,15 +65,6 @@ let Post = ({title, body, match, onDelete, id, editMode, handleEditMode, textEdi
     </Grid>
 );
 
-Post.propTypes ={
-  userId: PropTypes.number,
-  id: PropTypes.number,
-  title: PropTypes.string,
-  body: PropTypes.string,
-};
 
-const mapStateToProps = (state) => ({
-  post: state.post.loaded,
-});
 
-export default connect(mapStateToProps, null)(Post);
+export default Post;
