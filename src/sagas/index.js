@@ -20,7 +20,6 @@ const postNotes = (payload) => {
         .catch(err => err)
 }
 const deleteNotes = (payload) => {
-    console.log('zalupa', payload.item)
     return axios.delete(`http://localhost:8000/notes/${payload.item}`)
 }
 
