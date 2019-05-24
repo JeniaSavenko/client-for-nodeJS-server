@@ -50,7 +50,6 @@ class InnerApp extends React.Component{
                />}
              />
              <Route path={`${match.path}/newPost`} render={()=><PostCreateForm post={posts}/>} />
-             {/*<Route path={`${match.path}/posts/:id`} render={()=><PostsPage/>} />*/}
            </Switch>
          </Grid>
        </div>
@@ -68,7 +67,7 @@ const mapDispatchToProps = dispatch => ({
   deletePostAction: (item) => dispatch(rmPost(item)),
   handleEditModeAction: itemId => dispatch(handleEditMode(itemId)),
   textEditAction: (itemId, itemValue) => dispatch(textEdit(itemId, itemValue)),
-  saveTextAction: (itemId) => dispatch(savePost(itemId))
+  saveTextAction: (itemId, text, title) => dispatch(savePost(itemId, text, title))
 
 });
 

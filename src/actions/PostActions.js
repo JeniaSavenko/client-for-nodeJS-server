@@ -31,10 +31,12 @@ export function handleEditMode(itemId){
     itemId,
   }
 }
-export function savePost(itemId){
+export function savePost(itemId, text, title){
   return{
     type: SAVE_POST,
     itemId,
+    text,
+    title
   }
 }
 

@@ -1,18 +1,13 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import {Default} from "./Default";
 import Grid from "@material-ui/core/Grid";
-import {Link, Route, Switch} from "react-router-dom";
 import Button from "@material-ui/core/es/Button/Button";
 import {ChikiPukiIcon, PencilIcon, TrashIcon} from "./Icons";
 import TextField from "@material-ui/core/es/TextField/TextField";
 const mainClass = 'post';
 
-let Post = ({title, body, match, onDelete, id, editMode, handleEditMode, textEditAction, editableField, saveTextAction}) => (
+let Post = ({title, body, onDelete, id, editMode, handleEditMode, textEditAction, editableField, saveTextAction}) => (
     <Grid item xs={12}>
       <div className={mainClass}>
-        {/*Link to={`${match.url}/posts/${id}`}*/}
         <div className={`${mainClass}__head`}>
           <p className={`${mainClass}__title`}>{title}</p>
         </div>
@@ -36,13 +31,11 @@ let Post = ({title, body, match, onDelete, id, editMode, handleEditMode, textEdi
           }
         </div>
         <div className={`${mainClass}__footer`}>
-          {/*<p className={`${mainClass}__count`}>Id: {post.id}</p>*/}
-          {/*<p className={`${mainClass}__subtitle`}>UserId: {post.userId}</p>*/}
           {editMode &&
            <Button
              variant="contained"
              style={{backgroundColor:'#00c732'}}
-             onClick={(id) => saveTextAction(id)}
+             onClick={() => saveTextAction()}
            >
             <ChikiPukiIcon
               fill="#fff"
@@ -53,7 +46,7 @@ let Post = ({title, body, match, onDelete, id, editMode, handleEditMode, textEdi
           <Button
             variant="contained"
             color="primary"
-            onClick={(id) => handleEditMode(id)}
+            onClick={() => handleEditMode()}
           >
             <PencilIcon fill={'#fff'} width={'2rem'}/>
           </Button>

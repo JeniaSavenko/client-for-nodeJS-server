@@ -13,22 +13,20 @@ const initialState = {
 
 const editModePosts = (posts, id) => posts.map(postItem => ({
     ...postItem,
-    editMode: postItem.id === id,
-    //body: postItem.id === id ? 'pesun' : postItem.body,
-    editableField: postItem.body
+    editMode: postItem._id === id,
+    editableField: postItem.text
 }));
 
 const savePosts = (posts, id) => posts.map(postItem => ({
     ...postItem,
-    //editMode:
-    body: postItem.editableField,
+    text: postItem.editableField,
     editMode: false
 }));
 
 const handleTextChange = (posts, id, editableField) =>
-    posts.map(postItem => (console.log('ids: ', postItem.id, id) || {
+    posts.map(postItem => (console.log('ids: ', postItem._id, id) || {
         ...postItem,
-        editableField: postItem.id === id ? editableField : postItem.editableField
+        editableField: postItem._id === id ? editableField : postItem.editableField
     }));
 
 export function postReducer(state = initialState, action) {
@@ -58,7 +56,8 @@ export function postReducer(state = initialState, action) {
         case SAVE_POST:
             return {
                 ...state,
-                posts: savePosts(state.posts, action.itemId)
+                posts: savePosts(state.posts, action.itemId),
+                action
             };
 
         case HANDLE_TEXT_CHANGE:
