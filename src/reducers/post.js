@@ -4,11 +4,14 @@ import {
     DELETE_POST,
     CREATE_POST,
     EDIT_MODE_POST,
-    HANDLE_TEXT_CHANGE, SAVE_POST, POST_NOTES_SUCCESS
-} from '../actions/PostActions'
+    HANDLE_TEXT_CHANGE,
+    SAVE_POST,
+    POST_NOTES_SUCCESS,
+    ERROR_GET_POSTS
+} from '../actions/PostActions';
 
 const initialState = {
-    posts: [],
+    posts: [{ _id: '1', title: 'test', text: 'text text' }],
 };
 
 const editModePosts = (posts, id) => posts.map(postItem => ({
@@ -53,6 +56,7 @@ export function postReducer(state = initialState, action) {
                 ...state,
                 posts: editModePosts(state.posts, action.itemId)
             };
+
         case SAVE_POST:
             return {
                 ...state,
@@ -65,14 +69,22 @@ export function postReducer(state = initialState, action) {
                 ...state,
                 posts: handleTextChange(state.posts, action.itemId, action.itemValue)
             };
+
         case CREATE_POST:
             return {
                 ...state,
             };
+
         case POST_NOTES_SUCCESS:
             return {
                 ...state,
                 action
+            };
+
+        case ERROR_GET_POSTS:
+            return {
+                ...initialState,
+
             };
 
         default:
