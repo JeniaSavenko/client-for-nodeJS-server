@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
-import { ListItem } from '../components/ListItem';
+import ListItem  from '../components/ListItem';
 import Block from '../components/Block';
 import {
   getPosts, rmPost, savePost, textEdit

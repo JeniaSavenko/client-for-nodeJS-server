@@ -10,7 +10,7 @@ import {
   DELETE_NOTES_SUCCESS, SAVE_POST, ERROR_GET_POSTS,
 } from '../actions/PostActions';
 
-const url = 'http://localhost:8000/notes';
+const url = 'http://localhost:5000/notes';
 
 const combineRequests = {
   getNotes: () => axios.get(url)
@@ -40,18 +40,18 @@ function* getPosts(action) {
   }
 }
 
-function* postPosts(action) {
-  const item = { title: action.title, text: action.text };
-  try {
-    const response = yield call(combineRequests.postNotes, item);
-    if (response) {
-      yield put({ type: POST_NOTES_SUCCESS });
-      yield put({ type: GET_POSTS });
-    }
-  } catch (err) {
-    yield put({ type: ERROR_GET_POSTS, err });
-  }
-}
+// function* postPosts(action) {
+//   const item = { title: action.title, text: action.text };
+//   try {
+//     const response = yield call(combineRequests.postNotes, item);
+//     if (response) {
+//       yield put({ type: POST_NOTES_SUCCESS });
+//       yield put({ type: GET_POSTS });
+//     }
+//   } catch (err) {
+//     yield put({ type: ERROR_GET_POSTS, err });
+//   }
+// }
 
 function* deletePosts(action) {
   try {
@@ -77,7 +77,7 @@ function* putPosts(action) {
 
 function* actionWatcher() {
   yield takeLatest(GET_POSTS, getPosts);
-  yield takeLatest(CREATE_POST, postPosts);
+  //yield takeLatest(CREATE_POST, postPosts);
   yield takeLatest(DELETE_NOTES_SUCCESS, deletePosts);
   yield takeLatest(SAVE_POST, putPosts);
 }
