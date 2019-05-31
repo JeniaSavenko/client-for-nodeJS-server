@@ -10,8 +10,8 @@ const resources = {
       'Post creation': 'Post creation',
       'Add New Post': 'Add New Post',
       'Post Content': 'Post Content',
-      'Post Title': 'Post Title'
-    }
+      'Post Title': 'Post Title',
+    },
   },
   ru: {
     translation: {
@@ -21,9 +21,9 @@ const resources = {
       'Post creation': 'Создание поста',
       'Add New Post': 'Добавить новый пост',
       'Post Content': 'Контент поста',
-      'Post Title': 'Заголовок'
-    }
-  }
+      'Post Title': 'Заголовок',
+    },
+  },
 };
 i18n
   .use(initReactI18next)
@@ -34,8 +34,8 @@ i18n
     keySeparator: false,
 
     interpolation: {
-      escapeValue: false
-    }
+      escapeValue: false,
+    },
   });
 
 export default i18n;

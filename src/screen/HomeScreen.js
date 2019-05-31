@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {
-  ScrollView, FlatList, RefreshControl
-} from 'react-native';
+import { ScrollView, FlatList, RefreshControl, } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
-import ListItem  from '../components/ListItem';
+import ListItem from '../components/ListItem';
 import Block from '../components/Block';
-import {
-  getPosts, rmPost, savePost, textEdit
-} from '../actions/PostActions';
+import { getPosts, rmPost, savePost, textEdit } from '../actions/PostActions';
+import { goTo } from '../components/Navigator';
 
 
 const HomeScreen = ({
@@ -33,7 +30,7 @@ const HomeScreen = ({
       title={item.title}
       text={item.text}
       onPress={() => {
-        navigation.navigate('PostScreen', {
+        goTo('PostScreen', {
           post: item,
         });
       }}
@@ -57,11 +54,10 @@ const HomeScreen = ({
           maxToRenderPerBatch={10}
         />
       </ScrollView>
-      <Button title="Add Posts" onPress={() => navigation.navigate('AddPost')} />
+      <Button title="Add Posts" onPress={() => goTo('AddPost')} />
     </Block>
   );
 };
-
 
 const mapStateToProps = store => ({
   posts: store.post.posts,
@@ -74,6 +70,5 @@ const mapDispatchToProps = dispatch => ({
   saveTextAction: (itemId, text, title) => dispatch(savePost(itemId, text, title))
 
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

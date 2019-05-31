@@ -1,18 +1,87 @@
-import {
-  put, takeLatest, all, call
-} from 'redux-saga/effects';
-import * as axios from 'axios';
+import io from 'socket.io-client';
+import { eventChannel } from 'redux-saga';
+import { fork, take, call, put, cancel } from 'redux-saga/effects';
 import {
   CREATE_POST,
   GET_POSTS,
   POSTS_SUCCESS,
   POST_NOTES_SUCCESS,
-  DELETE_NOTES_SUCCESS, SAVE_POST, ERROR_GET_POSTS,
+  DELETE_NOTES_SUCCESS,
+  SAVE_POST,
+  ERROR_GET_POSTS,
+  SERVER_OFF,
+  SERVER_ON,
+  CHANNEL_ON,
+  ADD_TASK,
+  CHANNEL_OFF,
+  START_CHANNEL, STOP_CHANNEL,
 } from '../actions/PostActions';
 
-const url = 'http://localhost:5000/notes';
+const socketServerURL = 'http://localhost:3000';
 
-const combineRequests = {
+
+function connect() {
+  const socket = io(socketServerURL);
+  return new Promise(resolve => {
+    socket.on('connect', () => {
+      resolve(socket);
+    });
+
+    socket.on('CREATE_POST', ()=>{
+      emit()
+    })
+  });
+}
+
+function subscribe(socket) {
+  return eventChannel(emit => {
+    socket.on('CREATE_POST', ({ username }) => {
+      emit(createPostTitle({ title: 'test', text: 'test1' }));
+    });
+    socket.on('disconnect', e => {
+      // TODO: handle
+    });
+    return () => {};
+  });
+}
+
+function* read(socket) {
+  const channel = yield call(subscribe, socket);
+  while (true) {
+    let action = yield take(channel);
+    yield put(action);
+  }
+}
+
+function* write(socket) {
+  while (true) {
+    const { payload } = yield take(`${sendMessage}`);
+    socket.emit('CREATE_POST', payload);
+  }
+}
+
+function* handleIO(socket) {
+  yield fork(read, socket);
+  yield fork(write, socket);
+}
+
+function* flow() {
+  while (true) {
+    const socket = yield call(connect);
+    socket.emit('CREATE_POST', { title: 'test', text: 'test11111' });
+
+    const task = yield fork(handleIO, socket);
+
+    yield cancel(task);
+    socket.emit('logout');
+  }
+}
+
+export default function* rootSaga() {
+  yield fork(flow);
+}
+
+/* const combineRequests = {
   getNotes: () => axios.get(url)
     .then(response => response)
     .catch(err => err),
@@ -40,18 +109,18 @@ function* getPosts(action) {
   }
 }
 
-// function* postPosts(action) {
-//   const item = { title: action.title, text: action.text };
-//   try {
-//     const response = yield call(combineRequests.postNotes, item);
-//     if (response) {
-//       yield put({ type: POST_NOTES_SUCCESS });
-//       yield put({ type: GET_POSTS });
-//     }
-//   } catch (err) {
-//     yield put({ type: ERROR_GET_POSTS, err });
-//   }
-// }
+function* postPosts(action) {
+  const item = { title: action.title, text: action.text };
+  try {
+    const response = yield call(combineRequests.postNotes, item);
+    if (response) {
+      yield put({ type: POST_NOTES_SUCCESS });
+      yield put({ type: GET_POSTS });
+    }
+  } catch (err) {
+    yield put({ type: ERROR_GET_POSTS, err });
+  }
+}
 
 function* deletePosts(action) {
   try {
@@ -77,7 +146,7 @@ function* putPosts(action) {
 
 function* actionWatcher() {
   yield takeLatest(GET_POSTS, getPosts);
-  //yield takeLatest(CREATE_POST, postPosts);
+  yield takeLatest(CREATE_POST, postPosts);
   yield takeLatest(DELETE_NOTES_SUCCESS, deletePosts);
   yield takeLatest(SAVE_POST, putPosts);
 }
@@ -86,4 +155,4 @@ export default function* rootSaga() {
   yield all([
     actionWatcher(),
   ]);
-}
+} */

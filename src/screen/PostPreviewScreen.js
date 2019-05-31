@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import {
-  View, Text, StyleSheet, Linking, ScrollView, Dimensions
-} from 'react-native';
-import {
-  Button, Tile, Icon, Input
-} from 'react-native-elements';
+import { Button, Icon, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Block from '../components/Block';
 import { rmPost, savePost } from '../actions/PostActions';
-
+import { goTo } from '../components/Navigator';
 
 const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => {
   const post = navigation.getParam('post');
@@ -46,7 +41,8 @@ const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => 
             }}
             title="Save"
             onPress={() => {
-              saveTextAction(post._id, title, text) && navigation.navigate('Home');
+              saveTextAction(post._id, title, text);
+              goTo('Home');
             }}
           />
         </Block>
@@ -66,7 +62,8 @@ const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => 
             }}
             title="delete"
             onPress={() => {
-              deletePostAction(post._id) && navigation.navigate('Home');
+              deletePostAction(post._id);
+              goTo('Home');
             }}
           />
         </Block>
@@ -75,13 +72,11 @@ const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => 
   );
 };
 
-
 const mapStateToProps = store => store;
 
 const mapDispatchToProps = dispatch => ({
   saveTextAction: (itemId, title, text) => dispatch(savePost(itemId, title, text)),
   deletePostAction: item => dispatch(rmPost(item)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostPreviewScreen);

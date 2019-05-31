@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  TouchableOpacity, StyleSheet, View, Image, Text
+  TouchableOpacity, StyleSheet, View, Image, Text,
 } from 'react-native';
 import styled from 'styled-components';
 import Block from './Block';
@@ -8,6 +8,7 @@ import Block from './Block';
 const Title = styled.Text`
     fontSize: 16px;
 `;
+
 const Body = styled.Text`
     fontSize: 14px;
     color: #999999
@@ -27,6 +28,5 @@ const ListItem = ({ title, text, onPress }) => (
     </Block>
   </TouchableOpacity>
 );
-
 
 export default ListItem;

@@ -7,7 +7,7 @@ import {
   HANDLE_TEXT_CHANGE,
   SAVE_POST,
   POST_NOTES_SUCCESS,
-  ERROR_GET_POSTS
+  ERROR_GET_POSTS, CHANNEL_ON, CHANNEL_OFF, ADD_TASK, SERVER_OFF, SERVER_ON,
 } from '../actions/PostActions';
 
 const initialState = {
@@ -17,75 +17,46 @@ const initialState = {
 const editModePosts = (posts, id) => posts.map(postItem => ({
   ...postItem,
   editMode: postItem._id === id,
-  editableField: postItem.text
+  editableField: postItem.text,
 }));
 
 const savePosts = (posts, id) => posts.map(postItem => ({
   ...postItem,
   text: postItem.editableField,
-  editMode: false
-}));
-
-const handleTextChange = (posts, id, editableField) => posts.map(postItem => ({
-  ...postItem,
-  editableField: postItem._id === id ? editableField : postItem.editableField
+  editMode: false,
 }));
 
 export function postReducer(state = initialState, action) {
   switch (action.type) {
     case GET_POSTS:
       return {
-        ...state
+        ...state,
       };
-
     case POSTS_SUCCESS:
       return {
         ...state,
         posts: action.json,
       };
-
-    case DELETE_POST:
-      return {
-        ...state,
-        posts: state.posts.filter(item => item.id !== action.item)
-      };
-
     case EDIT_MODE_POST:
       return {
         ...state,
-        posts: editModePosts(state.posts, action.itemId)
+        posts: editModePosts(state.posts, action.itemId),
       };
-
     case SAVE_POST:
       return {
         ...state,
         posts: savePosts(state.posts, action.itemId),
-        action
+        action,
       };
-
-    case HANDLE_TEXT_CHANGE:
-      return {
-        ...state,
-        posts: handleTextChange(state.posts, action.itemId, action.itemValue)
-      };
-
     case CREATE_POST:
       return {
         ...state,
       };
-
     case POST_NOTES_SUCCESS:
       return {
         ...state,
-        action
+        action,
       };
-
-    case ERROR_GET_POSTS:
-      return {
-        ...initialState,
-
-      };
-
     default:
       return state;
   }

@@ -6,11 +6,10 @@ export const separateLiteralToProps = (strings, ...values) => ({ strings, values
 
 export const combineProps = (...values) => values.reduce((a, b) => ({
   values: a.values.concat(b.values),
-  strings: a.strings.concat(b.strings)
+  strings: a.strings.concat(b.strings),
 }), { strings: [], values: [] });
 
 export const applyProps = (fn, props) => fn(props.strings, ...props.values);
-
 
 const widthProps = separateLiteralToProps`
 	${({ width }) => (width === true ? 'width: 100%' : width && `width: ${(width)};`)}
@@ -40,7 +39,6 @@ const paddingProps = separateLiteralToProps`
 	${({ padding }) => padding && `padding: ${(padding)};`}
 	${({ p }) => p && `padding: ${(p)};`}
 `;
-/* Background: */
 
 const marginProps = separateLiteralToProps`
 	${({ mv }) => mv && `margin-vertical: ${(mv)};`}
@@ -60,6 +58,7 @@ const transformProps = separateLiteralToProps`
 	${({ scale }) => scale && `transform: scale(${(scale)});`}
 	${({ rotate }) => rotate && `transform: rotate(${(rotate)}deg);`}
 `;
+
 const isExist = value => value !== undefined;
 
 const positionProps = separateLiteralToProps`
@@ -109,10 +108,9 @@ const blockProps = combineProps(
   paddingProps,
   marginProps,
   positionProps,
-  superProps
+  superProps,
 );
 
 const Block = applyProps(styled.View, blockProps);
-
 
 export default Block;
