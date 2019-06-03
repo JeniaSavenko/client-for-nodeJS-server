@@ -8,6 +8,8 @@ import { goTo } from '../components/Navigator';
 const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => {
   const post = navigation.getParam('post');
 
+  const goTo = (screen, params) => navigation.navigate(screen, params);
+
   const [title, setTitle] = useState(post.title);
 
   const [text, setText] = useState(post.text);

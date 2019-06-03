@@ -9,6 +9,8 @@ import { goTo } from '../components/Navigator';
 
 
 const AddPostScreen = ({ setTitleAction, navigation }) => {
+  const goTo = (screen, params) => navigation.navigate(screen, params);
+
   const [title, setTitle] = useState();
 
   const [text, setText] = useState();
@@ -42,7 +44,7 @@ const mapStateToProps = store => ({
   createPost: store.post.posts,
 });
 const mapDispatchToProps = dispatch => ({
-  setTitleAction: (title, text) => dispatch(addTask(title, text)),
+  setTitleAction: (title, text) => dispatch(createPostTitle(title, text)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPostScreen);

@@ -4,8 +4,6 @@ import HomeScreen from '../screen/HomeScreen';
 import PostPreviewScreen from '../screen/PostPreviewScreen';
 import AddPostScreen from '../screen/AddPostScreen';
 
-export const goTo = (screen, params) => navigation.navigate(screen, params);
-
 const Navigator = createStackNavigator({
   Home: {
     screen: HomeScreen,

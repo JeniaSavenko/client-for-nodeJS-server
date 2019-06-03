@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Platform, StyleSheet, Text, View
+  Platform, StyleSheet, Text, View,
 } from 'react-native';
 import { Provider } from 'react-redux';
+import SocketIOClient from 'socket.io-client';
 import Navigator from './src/components/Navigator';
 import { store } from './src/store/configureStore';
 

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, FlatList, RefreshControl, } from 'react-native';
+import { ScrollView, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import ListItem from '../components/ListItem';
 import Block from '../components/Block';
-import { getPosts, rmPost, savePost, textEdit } from '../actions/PostActions';
+import {
+  getPosts, rmPost, savePost, textEdit,
+} from '../actions/PostActions';
 import { goTo } from '../components/Navigator';
 
 
@@ -12,16 +14,18 @@ const HomeScreen = ({
   posts,
   getPostsAction,
   navigation,
+  ...props
 }) => {
   useEffect(() => {
     getPostsAction();
   }, []);
 
+  const goTo = (screen, params) => navigation.navigate(screen, params);
+
   const [isLoading, setLoading] = useState(false);
 
   const update = async () => {
     setLoading(false);
-
     posts = getPostsAction();
   };
 
@@ -67,7 +71,7 @@ const mapDispatchToProps = dispatch => ({
   getPostsAction: () => dispatch(getPosts()),
   deletePostAction: item => dispatch(rmPost(item)),
   textEditAction: (itemId, itemValue) => dispatch(textEdit(itemId, itemValue)),
-  saveTextAction: (itemId, text, title) => dispatch(savePost(itemId, text, title))
+  saveTextAction: (itemId, text, title) => dispatch(savePost(itemId, text, title)),
 
 });
 
