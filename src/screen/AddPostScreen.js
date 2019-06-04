@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import {
-  Button, Tile, Icon, Input,
-} from 'react-native-elements';
+import { Button, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Block from '../components/Block';
-import { addTask, createPostTitle } from '../actions/PostActions';
-import { goTo } from '../components/Navigator';
-
+import { createPostTitle } from '../actions/PostActions';
+import { socket } from './HomeScreen';
 
 const AddPostScreen = ({ setTitleAction, navigation }) => {
   const goTo = (screen, params) => navigation.navigate(screen, params);
@@ -14,6 +11,11 @@ const AddPostScreen = ({ setTitleAction, navigation }) => {
   const [title, setTitle] = useState();
 
   const [text, setText] = useState();
+
+  const sendSocketIO = (title, text) => {
+    socket.emit('example_message', { title, text });
+    socket.on('test', msg => console.log(msg));
+  };
 
   return (
     <Block>
@@ -31,6 +33,7 @@ const AddPostScreen = ({ setTitleAction, navigation }) => {
         <Button
           title="Add"
           onPress={() => {
+            sendSocketIO(title, text);
             setTitleAction(title, text);
             goTo('Home');
           }}
@@ -43,6 +46,7 @@ const AddPostScreen = ({ setTitleAction, navigation }) => {
 const mapStateToProps = store => ({
   createPost: store.post.posts,
 });
+
 const mapDispatchToProps = dispatch => ({
   setTitleAction: (title, text) => dispatch(createPostTitle(title, text)),
 });

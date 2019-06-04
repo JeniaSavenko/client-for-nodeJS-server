@@ -2,19 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
+import openSocket from 'socket.io-client';
 import ListItem from '../components/ListItem';
 import Block from '../components/Block';
-import {
-  getPosts, rmPost, savePost, textEdit,
-} from '../actions/PostActions';
-import { goTo } from '../components/Navigator';
+import { getPosts } from '../actions/PostActions';
 
+export const socket = openSocket('http://localhost:3000');
 
 const HomeScreen = ({
   posts,
   getPostsAction,
   navigation,
-  ...props
 }) => {
   useEffect(() => {
     getPostsAction();
@@ -26,7 +24,6 @@ const HomeScreen = ({
 
   const update = async () => {
     setLoading(false);
-    posts = getPostsAction();
   };
 
   const renderItem = ({ item }) => (
@@ -49,7 +46,7 @@ const HomeScreen = ({
             refreshing={isLoading}
             onRefresh={update}
           />
-                )}
+        )}
       >
         <FlatList
           data={posts}
@@ -69,10 +66,6 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   getPostsAction: () => dispatch(getPosts()),
-  deletePostAction: item => dispatch(rmPost(item)),
-  textEditAction: (itemId, itemValue) => dispatch(textEdit(itemId, itemValue)),
-  saveTextAction: (itemId, text, title) => dispatch(savePost(itemId, text, title)),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

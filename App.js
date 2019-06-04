@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
-import {
-  Platform, StyleSheet, Text, View,
-} from 'react-native';
+import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
-import SocketIOClient from 'socket.io-client';
 import Navigator from './src/components/Navigator';
 import { store } from './src/store/configureStore';
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends PureComponent {
   render() {
     return (
       <Provider store={store}>
