@@ -4,24 +4,24 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      Posts: 'Posts',
-      'Add Post': 'Add Post',
-      Dashboard: 'Dashboard',
-      'Post creation': 'Post creation',
-      'Add New Post': 'Add New Post',
-      'Post Content': 'Post Content',
-      'Post Title': 'Post Title',
+      posts: 'Posts',
+      addPost: 'Add Post',
+      dashboard: 'Dashboard',
+      postCreation: 'Post creation',
+      addNewPost: 'Add New Post',
+      postContent: 'Post Content',
+      postTitle: 'Post Title',
     },
   },
   ru: {
     translation: {
-      Posts: 'Посты',
-      'Add Post': 'Добавить пост',
-      Dashboard: 'Главная страница',
-      'Post creation': 'Создание поста',
-      'Add New Post': 'Добавить новый пост',
-      'Post Content': 'Контент поста',
-      'Post Title': 'Заголовок',
+      posts: 'Посты',
+      addPost: 'Добавить пост',
+      dashboard: 'Главная страница',
+      postCreation: 'Создание поста',
+      addNewPost: 'Добавить новый пост',
+      postContent: 'Контент поста',
+      postTitle: 'Заголовок',
     },
   },
 };
