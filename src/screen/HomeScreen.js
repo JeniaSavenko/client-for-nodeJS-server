@@ -18,7 +18,7 @@ const HomeScreen = ({
 
   const [isLoading, setLoading] = useState(false);
 
-  const update = async () => {
+  const update = () => {
     setLoading(false);
   };
 

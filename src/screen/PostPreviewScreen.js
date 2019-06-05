@@ -13,17 +13,29 @@ const PostPreviewScreen = ({ navigation }) => {
 
   const [text, setText] = useState(post.text);
 
+  let timer;
+
+  const clearTimer = () => {
+    clearTimeout(timer);
+  };
+
+  const timeOut = (value, setValue) => {
+    clearTimer();
+    setValue(value);
+    timer = setTimeout(() => updatePost(post._id, title, text), 3000);
+  };
+
   return (
     <Block>
       <Input
         placeholder="Title"
         value={title}
-        onChangeText={value => setTitle(value)}
+        onChangeText={value => timeOut(value, setTitle)}
       />
       <Input
         placeholder="Text"
         value={text}
-        onChangeText={value => setText(value)}
+        onChangeText={value => timeOut(value, setText)}
       />
       <Block row ac jb widht pv="10" ph="5">
         <Block width="48%">
@@ -35,13 +47,14 @@ const PostPreviewScreen = ({ navigation }) => {
                 type="ionicon"
                 color="#fff"
               />
-)}
+            )}
             titleStyle={{
               paddingLeft: 5,
               fontSize: 16,
             }}
             title="Save"
             onPress={() => {
+              clearTimer();
               updatePost(post._id, title, text);
               goTo('Home');
             }}
@@ -56,7 +69,7 @@ const PostPreviewScreen = ({ navigation }) => {
                 type="ionicon"
                 color="#fff"
               />
-)}
+            )}
             titleStyle={{
               paddingLeft: 5,
               fontSize: 16,
