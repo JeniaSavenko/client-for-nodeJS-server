@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Input } from 'react-native-elements';
-import { connect } from 'react-redux';
 import Block from '../components/Block';
-import { createPostTitle } from '../actions/PostActions';
-import { socket } from './HomeScreen';
+import { sendPost } from '../api/socket';
 
-const AddPostScreen = ({ setTitleAction, navigation }) => {
+const AddPostScreen = ({ navigation }) => {
   const goTo = (screen, params) => navigation.navigate(screen, params);
 
   const [title, setTitle] = useState();
 
   const [text, setText] = useState();
-
-  const sendSocketIO = (title, text) => {
-    socket.emit('example_message', { title, text });
-    socket.on('test', msg => console.log(msg));
-  };
 
   return (
     <Block>
@@ -33,8 +26,7 @@ const AddPostScreen = ({ setTitleAction, navigation }) => {
         <Button
           title="Add"
           onPress={() => {
-            sendSocketIO(title, text);
-            setTitleAction(title, text);
+            sendPost({ title, text });
             goTo('Home');
           }}
         />
@@ -43,12 +35,4 @@ const AddPostScreen = ({ setTitleAction, navigation }) => {
   );
 };
 
-const mapStateToProps = store => ({
-  createPost: store.post.posts,
-});
-
-const mapDispatchToProps = dispatch => ({
-  setTitleAction: (title, text) => dispatch(createPostTitle(title, text)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddPostScreen);
+export default AddPostScreen;

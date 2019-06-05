@@ -1,11 +1,10 @@
+/* eslint no-underscore-dangle: 0 */
 import React, { useState } from 'react';
 import { Button, Icon, Input } from 'react-native-elements';
-import { connect } from 'react-redux';
 import Block from '../components/Block';
-import { rmPost, savePost } from '../actions/PostActions';
-import { goTo } from '../components/Navigator';
+import { deletePost, updatePost } from '../api/socket';
 
-const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => {
+const PostPreviewScreen = ({ navigation }) => {
   const post = navigation.getParam('post');
 
   const goTo = (screen, params) => navigation.navigate(screen, params);
@@ -43,7 +42,7 @@ const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => 
             }}
             title="Save"
             onPress={() => {
-              saveTextAction(post._id, title, text);
+              updatePost(post._id, title, text);
               goTo('Home');
             }}
           />
@@ -64,7 +63,7 @@ const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => 
             }}
             title="delete"
             onPress={() => {
-              deletePostAction(post._id);
+              deletePost(post._id);
               goTo('Home');
             }}
           />
@@ -74,11 +73,4 @@ const PostPreviewScreen = ({ navigation, saveTextAction, deletePostAction }) => 
   );
 };
 
-const mapStateToProps = store => store;
-
-const mapDispatchToProps = dispatch => ({
-  saveTextAction: (itemId, title, text) => dispatch(savePost(itemId, title, text)),
-  deletePostAction: item => dispatch(rmPost(item)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostPreviewScreen);
+export default PostPreviewScreen;

@@ -2,20 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
-import openSocket from 'socket.io-client';
 import ListItem from '../components/ListItem';
 import Block from '../components/Block';
-import { getPosts } from '../actions/PostActions';
-
-export const socket = openSocket('http://localhost:3000');
+import { runSocket } from '../api/socket';
 
 const HomeScreen = ({
   posts,
-  getPostsAction,
   navigation,
 }) => {
   useEffect(() => {
-    getPostsAction();
+    runSocket();
   }, []);
 
   const goTo = (screen, params) => navigation.navigate(screen, params);
@@ -64,8 +60,4 @@ const mapStateToProps = store => ({
   posts: store.post.posts,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getPostsAction: () => dispatch(getPosts()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps)(HomeScreen);
