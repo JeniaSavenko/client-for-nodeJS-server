@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: 0 */
 import { GET_POSTS, CREATE_POST, SAVE_POST } from '../actions/PostActions';
 
 const initialState = {

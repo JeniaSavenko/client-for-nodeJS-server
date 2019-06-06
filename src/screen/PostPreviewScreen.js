@@ -1,41 +1,43 @@
-/* eslint no-underscore-dangle: 0 */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Icon, Input } from 'react-native-elements';
 import Block from '../components/Block';
 import { deletePost, updatePost } from '../api/socket';
+import { Style } from '../style';
 
 const PostPreviewScreen = ({ navigation }) => {
   const post = navigation.getParam('post');
 
-  const goTo = (screen, params) => navigation.navigate(screen, params);
+  const goTo = navigation.navigate;
 
   const [title, setTitle] = useState(post.title);
 
   const [text, setText] = useState(post.text);
 
-  let timer;
-
-  const clearTimer = () => {
-    clearTimeout(timer);
-  };
-
-  const timeOut = (value, setValue) => {
-    clearTimer();
-    setValue(value);
-    timer = setTimeout(() => updatePost(post._id, title, text), 3000);
-  };
+  useEffect(
+    () => {
+      const timer = setTimeout(() => updatePost(post._id, title, text), 3000);
+      return () => {
+        clearTimeout(timer);
+      };
+    },
+    [title, text],
+  );
 
   return (
     <Block>
       <Input
         placeholder="Title"
         value={title}
-        onChangeText={value => timeOut(value, setTitle)}
+        onChangeText={(value) => {
+          setTitle(value);
+        }}
       />
       <Input
         placeholder="Text"
         value={text}
-        onChangeText={value => timeOut(value, setText)}
+        onChangeText={(value) => {
+          setText(value);
+        }}
       />
       <Block row ac jb widht pv="10" ph="5">
         <Block width="48%">
@@ -43,18 +45,14 @@ const PostPreviewScreen = ({ navigation }) => {
             outline
             icon={(
               <Icon
-                name="ios-save"
-                type="ionicon"
-                color="#fff"
+                name={Style.iconType}
+                type={Style.iconSave}
+                color={Style.colorWhite}
               />
             )}
-            titleStyle={{
-              paddingLeft: 5,
-              fontSize: 16,
-            }}
+            titleStyle={Style.titleStyle}
             title="Save"
             onPress={() => {
-              clearTimer();
               updatePost(post._id, title, text);
               goTo('Home');
             }}
@@ -65,15 +63,12 @@ const PostPreviewScreen = ({ navigation }) => {
             outline
             icon={(
               <Icon
-                name="ios-trash"
-                type="ionicon"
-                color="#fff"
+                name={Style.iconTrash}
+                type={Style.iconType}
+                color={Style.colorWhite}
               />
             )}
-            titleStyle={{
-              paddingLeft: 5,
-              fontSize: 16,
-            }}
+            titleStyle={Style.titleStyle}
             title="delete"
             onPress={() => {
               deletePost(post._id);

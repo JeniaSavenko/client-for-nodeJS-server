@@ -4,7 +4,7 @@ import Block from '../components/Block';
 import { sendPost } from '../api/socket';
 
 const AddPostScreen = ({ navigation }) => {
-  const goTo = (screen, params) => navigation.navigate(screen, params);
+  const goTo = navigation.navigate;
 
   const [title, setTitle] = useState();
 

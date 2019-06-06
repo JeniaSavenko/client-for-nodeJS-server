@@ -60,10 +60,10 @@ ${({ rotate }) => rotate && `transform: rotate(${(rotate)}deg);`}
 
 const positionProps = separateLiteralToProps`
 ${({ zIndex }) => zIndex && `z-index: ${(zIndex)};`}
-${({ top }) => (top !== undefined) && `top: ${(top)};`}
-${({ left }) => (left !== undefined) && `left: ${(left)};`}
-${({ right }) => (right !== undefined) && `right: ${(right)};`}
-${({ bottom }) => (bottom !== undefined) && `bottom: ${(bottom)};`}
+${({ top }) => top && `top: ${(top)};`}
+${({ left }) => left && `left: ${(left)};`}
+${({ right }) => right && `right: ${(right)};`}
+${({ bottom }) => bottom && `bottom: ${(bottom)};`}
 `;
 
 const superProps = separateLiteralToProps`

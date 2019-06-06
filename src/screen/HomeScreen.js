@@ -14,11 +14,12 @@ const HomeScreen = ({
     runSocket();
   }, []);
 
-  const goTo = (screen, params) => navigation.navigate(screen, params);
+  const goTo = navigation.navigate;
 
   const [isLoading, setLoading] = useState(false);
 
   const update = () => {
+    runSocket();
     setLoading(false);
   };
 
@@ -46,9 +47,8 @@ const HomeScreen = ({
       >
         <FlatList
           data={posts}
+          keyExtractor={item => item._id}
           renderItem={renderItem}
-          initialNumToRender={10}
-          maxToRenderPerBatch={10}
         />
       </ScrollView>
       <Button title="Add Posts" onPress={() => goTo('AddPost')} />

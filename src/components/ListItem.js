@@ -1,16 +1,8 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import styled from 'styled-components';
 import Block from './Block';
+import { Body, Title } from '../style';
 
-const Title = styled.Text`
-    fontSize: 16px;
-`;
-
-const Body = styled.Text`
-    fontSize: 14px;
-    color: #999999
-`;
 
 const ListItem = ({ title, text, onPress }) => (
   <TouchableOpacity onPress={onPress}>

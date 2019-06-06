@@ -13,7 +13,10 @@ export const configureSocket = (s) => {
 };
 
 export const runSocket = () => {
-  socket = io(url);
+  socket = io(url, {
+    pingInterval: 30000,
+    pingTimeout: 60000,
+  });
   socket.connect();
 
   socket.on('get_post', (post) => {
