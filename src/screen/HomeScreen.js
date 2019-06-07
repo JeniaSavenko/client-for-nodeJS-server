@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
+import { useTranslation } from 'react-i18next';
 import ListItem from '../components/ListItem';
 import Block from '../components/Block';
 import { runSocket } from '../api/socket';
+import HeaderButton from '../components/HeaderButton';
 
 const HomeScreen = ({
   posts,
@@ -15,6 +17,8 @@ const HomeScreen = ({
   }, []);
 
   const goTo = navigation.navigate;
+
+  const { t } = useTranslation();
 
   const [isLoading, setLoading] = useState(false);
 
@@ -37,6 +41,7 @@ const HomeScreen = ({
 
   return (
     <Block height width>
+
       <ScrollView
         refreshControl={(
           <RefreshControl
@@ -51,9 +56,13 @@ const HomeScreen = ({
           renderItem={renderItem}
         />
       </ScrollView>
-      <Button title="Add Posts" onPress={() => goTo('AddPost')} />
+      <Button title={t('addPost')} onPress={() => goTo('AddPost')} />
     </Block>
   );
+};
+
+HomeScreen.navigationOptions = {
+  headerTitle: <HeaderButton />,
 };
 
 const mapStateToProps = store => ({

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Icon, Input } from 'react-native-elements';
+import { useTranslation } from 'react-i18next';
 import Block from '../components/Block';
 import { deletePost, updatePost } from '../api/socket';
 import { Style } from '../style';
@@ -13,9 +14,11 @@ const PostPreviewScreen = ({ navigation }) => {
 
   const [text, setText] = useState(post.text);
 
+  const { t } = useTranslation();
+
   useEffect(
     () => {
-      const timer = setTimeout(() => updatePost(post._id, title, text), 3000);
+      const timer = setTimeout(() => updatePost(post._id, title, text), 2000);
       return () => {
         clearTimeout(timer);
       };
@@ -26,14 +29,14 @@ const PostPreviewScreen = ({ navigation }) => {
   return (
     <Block>
       <Input
-        placeholder="Title"
+        placeholder={t('title')}
         value={title}
         onChangeText={(value) => {
           setTitle(value);
         }}
       />
       <Input
-        placeholder="Text"
+        placeholder={t('text')}
         value={text}
         onChangeText={(value) => {
           setText(value);
@@ -45,13 +48,13 @@ const PostPreviewScreen = ({ navigation }) => {
             outline
             icon={(
               <Icon
-                name={Style.iconType}
-                type={Style.iconSave}
+                name={Style.iconSave}
+                type={Style.iconType}
                 color={Style.colorWhite}
               />
             )}
             titleStyle={Style.titleStyle}
-            title="Save"
+            title={t('save')}
             onPress={() => {
               updatePost(post._id, title, text);
               goTo('Home');
@@ -69,7 +72,7 @@ const PostPreviewScreen = ({ navigation }) => {
               />
             )}
             titleStyle={Style.titleStyle}
-            title="delete"
+            title={t('delete')}
             onPress={() => {
               deletePost(post._id);
               goTo('Home');
