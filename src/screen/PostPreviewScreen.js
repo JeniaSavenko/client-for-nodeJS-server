@@ -57,7 +57,7 @@ const PostPreviewScreen = ({ navigation }) => {
             title={t('save')}
             onPress={() => {
               updatePost(post._id, title, text);
-              goTo('Home');
+              goTo('PostScreen');
             }}
           />
         </Block>
@@ -75,7 +75,7 @@ const PostPreviewScreen = ({ navigation }) => {
             title={t('delete')}
             onPress={() => {
               deletePost(post._id);
-              goTo('Home');
+              goTo('PostScreen');
             }}
           />
         </Block>

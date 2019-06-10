@@ -2,9 +2,9 @@ import io from 'socket.io-client';
 import {
   createPostTitle, getPosts, rmPost, savePost,
 } from '../actions/PostActions';
+import { getToken, regNewUser } from '../actions/UserActions';
 
 const url = 'http://localhost:3000';
-
 let socket;
 let store;
 
@@ -21,6 +21,14 @@ export const runSocket = () => {
 
   socket.on('get_post', (post) => {
     store.dispatch(getPosts(post));
+  });
+};
+
+export const registration = (name, password) => {
+  store.dispatch(regNewUser(name));
+  socket.emit('registaration', { name, password });
+  socket.on('get_token', (msg) => {
+    store.dispatch(getToken(msg));
   });
 };
 

@@ -30,7 +30,7 @@ const AddPostScreen = ({ navigation }) => {
           title={t('add')}
           onPress={() => {
             sendPost({ title, text });
-            goTo('Home');
+            goTo('PostScreen');
           }}
         />
       </Block>

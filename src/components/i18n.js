@@ -16,6 +16,10 @@ const resources = {
       add: 'Add',
       postContent: 'Post Content',
       postTitle: 'Post Title',
+      userPass: 'User Password',
+      userName: 'User Name',
+      login: 'Login',
+      registration: 'Registration',
     },
   },
   ru: {
@@ -32,6 +36,10 @@ const resources = {
       addNewPost: 'Добавить новый пост',
       postContent: 'Контент поста',
       postTitle: 'Заголовок',
+      userPass: 'Пароль',
+      userName: 'Имя Пользователя',
+      login: 'Вход',
+      registration: 'Регистрация',
     },
   },
 };
@@ -39,7 +47,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'en',
+    lng: 'ru',
 
     keySeparator: false,
 

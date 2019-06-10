@@ -1,4 +1,6 @@
-import { GET_POSTS, CREATE_POST, SAVE_POST } from '../actions/PostActions';
+import {
+  GET_POSTS, CREATE_POST, SAVE_POST,
+} from '../actions/PostActions';
 
 const initialState = {
   posts: [{ _id: '', title: '', text: '' }],
