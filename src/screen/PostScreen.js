@@ -7,6 +7,7 @@ import ListItem from '../components/ListItem';
 import Block from '../components/Block';
 import { runSocket } from '../api/socket';
 import HeaderButton from '../components/HeaderButton';
+import LogOutButton from '../components/LogOutButton';
 
 const PostScreen = ({
   posts,
@@ -59,7 +60,7 @@ const PostScreen = ({
 
 PostScreen.navigationOptions = {
   headerTitle: <HeaderButton />,
-  headerLeft: null,
+  headerLeft: <LogOutButton />,
 };
 
 const mapStateToProps = store => ({

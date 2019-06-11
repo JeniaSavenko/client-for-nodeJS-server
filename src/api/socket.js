@@ -1,8 +1,9 @@
 import io from 'socket.io-client';
+import { AsyncStorage } from 'react-native';
 import {
   createPostTitle, getPosts, rmPost, savePost,
 } from '../actions/PostActions';
-import { getToken, regNewUser } from '../actions/UserActions';
+import { getToken, loginUser, regNewUser } from '../actions/UserActions';
 
 const url = 'http://localhost:3000';
 let socket;
@@ -12,10 +13,16 @@ export const configureSocket = (s) => {
   store = s;
 };
 
+export const getUserToken = () => AsyncStorage.getItem('userToken')
+  .then((token) => {
+    store.dispatch(getToken(token));
+  });
+
 export const runSocket = () => {
   socket = io(url, {
-    pingInterval: 30000,
-    pingTimeout: 60000,
+    query: {
+      token: getUserToken(),
+    },
   });
   socket.connect();
 
@@ -24,12 +31,21 @@ export const runSocket = () => {
   });
 };
 
+export const saveUserToken = async (response) => {
+  await AsyncStorage.setItem('userToken', response);
+};
+
 export const registration = (name, password) => {
   store.dispatch(regNewUser(name));
   socket.emit('registaration', { name, password });
   socket.on('get_token', (msg) => {
-    store.dispatch(getToken(msg));
+    saveUserToken(msg);
   });
+};
+
+export const login = (name, password, token) => {
+  store.dispatch(loginUser(name));
+  socket.emit('login', { name, password, token });
 };
 
 export const sendPost = (post) => {
