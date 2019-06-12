@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import Block from '../components/Block';
-import { runSocket } from '../api/socket';
-
 
 const HomeScreen = ({
   navigation,
 }) => {
-  useEffect(() => {
-    runSocket();
-  }, []);
-
   const goTo = navigation.navigate;
 
   const { t } = useTranslation();

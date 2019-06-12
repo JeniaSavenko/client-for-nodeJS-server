@@ -3,14 +3,12 @@ import { Button, Input } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import Block from '../components/Block';
-import { login } from '../api/socket';
+import { loginUser } from '../actions/UserActions';
 
 const LoginScreen = ({
   navigation,
-  token,
+  login,
 }) => {
-  const goTo = navigation.navigate;
-
   const { t } = useTranslation();
 
   const [userName, setUserName] = useState();
@@ -32,8 +30,7 @@ const LoginScreen = ({
       <Button
         title={t('login')}
         onPress={() => {
-          login(userName, userPass, token);
-          goTo('PostScreen');
+          login(userName, userPass, navigation);
         }}
       />
     </Block>
@@ -44,4 +41,8 @@ const mapStateToProps = store => ({
   token: store.user.token,
 });
 
-export default connect(mapStateToProps)(LoginScreen);
+const mapDispatchToProps = dispatch => ({
+  login: (name, password, navigation) => dispatch(loginUser(name, password, navigation)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

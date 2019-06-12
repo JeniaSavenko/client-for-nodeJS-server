@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Input } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import Block from '../components/Block';
-import { registration } from '../api/socket';
-
+import { regNewUser } from '../actions/UserActions';
 
 const CreateUserScreen = ({
   navigation,
+  createUser,
 }) => {
-  const goTo = navigation.navigate;
-
   const { t } = useTranslation();
 
   const [userName, setUserName] = useState();
@@ -31,12 +30,19 @@ const CreateUserScreen = ({
       <Button
         title={t('registration')}
         onPress={() => {
-          registration(userName, userPass);
-          goTo('PostScreen');
+          createUser(userName, userPass, navigation);
         }}
       />
     </Block>
   );
 };
 
-export default CreateUserScreen;
+const mapStateToProps = store => ({
+  token: store.user.token,
+});
+
+const mapDispatchToProps = dispatch => ({
+  createUser: (name, password, navigation) => dispatch(regNewUser(name, password, navigation)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUserScreen);

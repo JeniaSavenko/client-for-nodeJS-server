@@ -3,25 +3,21 @@ import { AsyncStorage } from 'react-native';
 import {
   createPostTitle, getPosts, rmPost, savePost,
 } from '../actions/PostActions';
-import { getToken, loginUser, regNewUser } from '../actions/UserActions';
 
 const url = 'http://localhost:3000';
 let socket;
 let store;
 
+const JWTToken = AsyncStorage.getItem('userToken');
+
 export const configureSocket = (s) => {
   store = s;
 };
 
-export const getUserToken = () => AsyncStorage.getItem('userToken')
-  .then((token) => {
-    store.dispatch(getToken(token));
-  });
-
 export const runSocket = () => {
   socket = io(url, {
     query: {
-      token: getUserToken(),
+      token: JWTToken,
     },
   });
   socket.connect();
@@ -29,23 +25,6 @@ export const runSocket = () => {
   socket.on('get_post', (post) => {
     store.dispatch(getPosts(post));
   });
-};
-
-export const saveUserToken = async (response) => {
-  await AsyncStorage.setItem('userToken', response);
-};
-
-export const registration = (name, password) => {
-  store.dispatch(regNewUser(name));
-  socket.emit('registaration', { name, password });
-  socket.on('get_token', (msg) => {
-    saveUserToken(msg);
-  });
-};
-
-export const login = (name, password, token) => {
-  store.dispatch(loginUser(name));
-  socket.emit('login', { name, password, token });
 };
 
 export const sendPost = (post) => {

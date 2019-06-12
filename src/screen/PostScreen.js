@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
@@ -13,6 +13,10 @@ const PostScreen = ({
   posts,
   navigation,
 }) => {
+  useEffect(() => {
+    runSocket();
+  }, []);
+
   const goTo = navigation.navigate;
 
   const { t } = useTranslation();
@@ -38,7 +42,6 @@ const PostScreen = ({
 
   return (
     <Block height width>
-
       <ScrollView
         refreshControl={(
           <RefreshControl
