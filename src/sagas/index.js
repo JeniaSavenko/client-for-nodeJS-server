@@ -43,10 +43,8 @@ function* CreateNewUser(action) {
   }
 }
 
-function* Logout(action) {
+function* Logout() {
   AsyncStorage.removeItem('userToken');
-  console.log(action);
-  // action.navigation.navigate('HomeScreen');
   yield put({ type: LOGOUT_USER });
 }
 
