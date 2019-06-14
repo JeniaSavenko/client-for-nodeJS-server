@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Block from '../components/Block';
 import { deletePost, updatePost } from '../api/socket';
 import { Style } from '../style';
+import { Navigation } from '../constants/Navigation';
 
 const PostPreviewScreen = ({ navigation }) => {
   const post = navigation.getParam('post');
@@ -57,7 +58,7 @@ const PostPreviewScreen = ({ navigation }) => {
             title={t('save')}
             onPress={() => {
               updatePost(post._id, title, text);
-              goTo('PostScreen');
+              goTo(Navigation.PostScreen);
             }}
           />
         </Block>
@@ -75,7 +76,7 @@ const PostPreviewScreen = ({ navigation }) => {
             title={t('delete')}
             onPress={() => {
               deletePost(post._id);
-              goTo('PostScreen');
+              goTo(Navigation.PostScreen);
             }}
           />
         </Block>

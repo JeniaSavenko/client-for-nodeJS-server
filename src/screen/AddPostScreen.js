@@ -3,6 +3,7 @@ import { Button, Input } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import Block from '../components/Block';
 import { sendPost } from '../api/socket';
+import { Navigation } from '../constants/Navigation';
 
 const AddPostScreen = ({ navigation }) => {
   const goTo = navigation.navigate;
@@ -30,7 +31,7 @@ const AddPostScreen = ({ navigation }) => {
           title={t('add')}
           onPress={() => {
             sendPost({ title, text });
-            goTo('PostScreen');
+            goTo(Navigation.PostScreen);
           }}
         />
       </Block>

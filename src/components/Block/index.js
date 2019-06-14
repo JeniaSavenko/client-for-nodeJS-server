@@ -10,7 +10,7 @@ export const combineProps = (...values) => values.reduce((a, b) => ({
 export const applyProps = (fn, props) => fn(props.strings, ...props.values);
 
 const widthProps = separateLiteralToProps`
-${({ width }) => (width === true ? 'width: 100%' : width && `width: ${(width)};`)}
+${({ width }) => (width === true ? 'width: 100%' : `width: ${(width)};`)}
 ${({ height }) => (height === true ? 'height: 100%' : `height: ${(height)};`)}
 ${({ minHeight }) => minHeight && `min-height: ${(minHeight)};`}
 ${({ minWidth }) => minWidth && `min-width: ${(minWidth)};`}

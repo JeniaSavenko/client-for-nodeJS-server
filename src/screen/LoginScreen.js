@@ -15,6 +15,10 @@ const LoginScreen = ({
 
   const [userPass, setUserPass] = useState();
 
+  function onLogin() {
+    login(userName, userPass, navigation);
+  }
+
   return (
     <Block height width>
       <Input
@@ -29,9 +33,7 @@ const LoginScreen = ({
       />
       <Button
         title={t('login')}
-        onPress={() => {
-          login(userName, userPass, navigation);
-        }}
+        onPress={onLogin}
       />
     </Block>
   );

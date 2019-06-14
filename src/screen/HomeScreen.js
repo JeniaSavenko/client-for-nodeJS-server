@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import Block from '../components/Block';
+import { Navigation } from '../constants/Navigation';
 
 const HomeScreen = ({
   navigation,
@@ -16,7 +17,7 @@ const HomeScreen = ({
         <Button title={t('login')} onPress={() => goTo('LoginScreen')} />
       </Block>
       <Block width="60%">
-        <Button title={t('registration')} onPress={() => goTo('CreateUserScreen')} />
+        <Button title={t('registration')} onPress={() => goTo(Navigation.CreateUserScreen)} />
       </Block>
     </Block>
   );

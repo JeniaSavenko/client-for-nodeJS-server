@@ -20,6 +20,9 @@ const resources = {
       userName: 'User Name',
       login: 'Login',
       registration: 'Registration',
+      ru: 'РУС',
+      en: 'EN',
+      logout: 'LogOut',
     },
   },
   ru: {
@@ -40,6 +43,9 @@ const resources = {
       userName: 'Имя Пользователя',
       login: 'Вход',
       registration: 'Регистрация',
+      ru: 'РУС',
+      en: 'EN',
+      logout: 'Выход',
     },
   },
 };
@@ -47,7 +53,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'ru',
+    lng: 'en',
 
     keySeparator: false,
 

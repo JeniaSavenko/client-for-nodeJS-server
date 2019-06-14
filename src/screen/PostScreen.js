@@ -8,6 +8,7 @@ import Block from '../components/Block';
 import { runSocket } from '../api/socket';
 import HeaderButton from '../components/HeaderButton';
 import LogOutButton from '../components/LogOutButton';
+import { Navigation } from '../constants/Navigation';
 
 const PostScreen = ({
   posts,
@@ -33,7 +34,7 @@ const PostScreen = ({
       title={item.title}
       text={item.text}
       onPress={() => {
-        goTo('PostPreviewScreen', {
+        goTo(Navigation.PostPreviewScreen, {
           post: item,
         });
       }}
@@ -56,7 +57,7 @@ const PostScreen = ({
           renderItem={renderItem}
         />
       </ScrollView>
-      <Button title={t('addPost')} onPress={() => goTo('AddPost')} />
+      <Button title={t('addPost')} onPress={() => goTo(Navigation.AddPost)} />
     </Block>
   );
 };

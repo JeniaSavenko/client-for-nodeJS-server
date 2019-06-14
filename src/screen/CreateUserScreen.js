@@ -15,23 +15,33 @@ const CreateUserScreen = ({
 
   const [userPass, setUserPass] = useState();
 
+  function handleUserNameChange(name) {
+    setUserName(name);
+  }
+
+  function handleUserPassChange(pass) {
+    setUserPass(pass);
+  }
+
+  function onCreateUser() {
+    createUser(userName, userPass, navigation);
+  }
+
   return (
     <Block height width>
       <Input
         placeholder={t('userName')}
         value={userName}
-        onChangeText={value => setUserName(value)}
+        onChangeText={handleUserNameChange}
       />
       <Input
         placeholder={t('userPass')}
         value={userPass}
-        onChangeText={value => setUserPass(value)}
+        onChangeText={handleUserPassChange}
       />
       <Button
         title={t('registration')}
-        onPress={() => {
-          createUser(userName, userPass, navigation);
-        }}
+        onPress={onCreateUser}
       />
     </Block>
   );

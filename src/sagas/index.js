@@ -6,15 +6,15 @@ import { AsyncStorage } from 'react-native';
 import {
   CREATE_USER, ERROR, LOGIN_SUCCESS, LOGIN_USER, LOGOUT_USER,
 } from '../actions/UserActions';
-
-const url = 'http://localhost:3000/auth';
+import { Auth } from '../constants/Auth';
+import { Navigation } from '../constants/Navigation';
 
 const combineRequests = {
-  login: payload => axios.post(`${url}/login`, payload)
+  login: payload => axios.post(`${Auth.url}${Auth.login}`, payload)
     .then(response => response)
     .catch(err => err),
 
-  reg: payload => axios.post(`${url}/reg`, payload)
+  reg: payload => axios.post(`${Auth.url}${Auth.reg}`, payload)
     .then(response => response)
     .catch(err => err),
 };
@@ -24,8 +24,8 @@ function* Login(action) {
   const response = yield call(combineRequests.login, user);
   if (response.data) {
     yield put({ type: LOGIN_SUCCESS, response });
-    AsyncStorage.setItem('userToken', response.data.accessToken);
-    action.navigation.navigate('PostScreen');
+    AsyncStorage.setItem(Auth.userToken, response.data.accessToken);
+    action.navigation.navigate(Navigation.PostScreen);
   } else {
     yield put({ type: ERROR, response });
   }
@@ -36,15 +36,15 @@ function* CreateNewUser(action) {
   const response = yield call(combineRequests.reg, user);
   if (response) {
     yield put({ type: LOGIN_SUCCESS, response });
-    AsyncStorage.setItem('userToken', response.data.accessToken);
-    action.navigation.navigate('PostScreen');
+    AsyncStorage.setItem(Auth.userToken, response.data.accessToken);
+    action.navigation.navigate(Navigation.PostScreen);
   } else {
     yield put({ type: ERROR, response });
   }
 }
 
 function* Logout() {
-  AsyncStorage.removeItem('userToken');
+  AsyncStorage.removeItem(Auth.userToken);
   yield put({ type: LOGOUT_USER });
 }
 
