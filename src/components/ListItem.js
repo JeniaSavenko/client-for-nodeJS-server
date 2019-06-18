@@ -4,19 +4,30 @@ import Block from './Block';
 import { Body, Title } from '../style';
 
 
-const ListItem = ({ title, text, onPress }) => (
-  <TouchableOpacity onPress={onPress}>
-    <Block row ac>
-      <Block pv={5} mr={50}>
-        <Title>
-          {title}
-        </Title>
-        <Body>
-          {text}
-        </Body>
+const ListItem = ({
+  title, text, save, onPress,
+}) => {
+  const newDate = new Date(save).toISOString().slice(0, 10);
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Block row ac>
+        <Block flex={1} pv={5} mr={50}>
+          <Title>
+            {title}
+          </Title>
+          <Body>
+            {text}
+          </Body>
+        </Block>
+        <Block flex={1} row ae je>
+          <Body>Last Save </Body>
+          <Body>
+            {newDate}
+          </Body>
+        </Block>
       </Block>
-    </Block>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
+};
 
 export default ListItem;

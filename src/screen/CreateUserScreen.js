@@ -9,11 +9,11 @@ const CreateUserScreen = ({
   navigation,
   createUser,
 }) => {
-  const { t } = useTranslation();
-
   const [userName, setUserName] = useState();
 
   const [userPass, setUserPass] = useState();
+
+  const { t } = useTranslation();
 
   function handleUserNameChange(name) {
     setUserName(name);

@@ -15,6 +15,14 @@ const LoginScreen = ({
 
   const [userPass, setUserPass] = useState();
 
+  function handleUserNameChange(name) {
+    setUserName(name);
+  }
+
+  function handleUserPassChange(pass) {
+    setUserPass(pass);
+  }
+
   function onLogin() {
     login(userName, userPass, navigation);
   }
@@ -24,12 +32,12 @@ const LoginScreen = ({
       <Input
         placeholder={t('userName')}
         value={userName}
-        onChangeText={value => setUserName(value)}
+        onChangeText={handleUserNameChange}
       />
       <Input
         placeholder={t('userPass')}
         value={userPass}
-        onChangeText={value => setUserPass(value)}
+        onChangeText={handleUserPassChange}
       />
       <Button
         title={t('login')}

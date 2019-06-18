@@ -3,41 +3,48 @@ import { AsyncStorage } from 'react-native';
 import {
   createPostTitle, getPosts, rmPost, savePost,
 } from '../actions/PostActions';
+import { Auth } from '../constants/Auth';
 
-const url = 'http://localhost:3000';
 let socket;
 let store;
 
-const JWTToken = AsyncStorage.getItem('userToken');
+class Socket {
+  static socket;
 
-export const configureSocket = (s) => {
-  store = s;
-};
+  static store;
 
-export const runSocket = () => {
-  socket = io(url, {
-    query: {
-      token: JWTToken,
-    },
-  });
-  socket.connect();
+  configureSocket = (s) => {
+    store = s;
+  };
 
-  socket.on('get_post', (post) => {
-    store.dispatch(getPosts(post));
-  });
-};
+  runSocket = () => {
+    socket = io(Auth.mainUrl, {
+      query: {
+        token: AsyncStorage.getItem('userToken'),
+      },
+    });
+    socket.connect();
 
-export const sendPost = (post) => {
-  store.dispatch(createPostTitle(post));
-  socket.emit('send_post', post);
-};
+    socket.on('get_post', (post) => {
+      store.dispatch(getPosts(post));
+    });
+  };
 
-export const deletePost = (id) => {
-  store.dispatch(rmPost(id));
-  socket.emit('delete_post', id);
-};
+  sendPost = (post) => {
+    store.dispatch(createPostTitle(post));
+    socket.emit('send_post', post);
+  };
 
-export const updatePost = (id, title, text) => {
-  store.dispatch(savePost(id, title, text));
-  socket.emit('update_post', { id, title, text });
-};
+  deletePost = (id) => {
+    store.dispatch(rmPost(id));
+    socket.emit('delete_post', id);
+  };
+
+  updatePost = (id, title, text) => {
+    store.dispatch(savePost(id, title, text));
+    socket.emit('update_post', { id, title, text });
+  };
+}
+
+
+export const WebSocket = new Socket();

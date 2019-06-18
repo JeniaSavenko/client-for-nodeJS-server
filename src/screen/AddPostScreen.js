@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import { Button, Input } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import Block from '../components/Block';
-import { sendPost } from '../api/socket';
+import { WebSocket } from '../api/socket';
 import { Navigation } from '../constants/Navigation';
 
 const AddPostScreen = ({ navigation }) => {
-  const goTo = navigation.navigate;
-
   const [title, setTitle] = useState();
 
   const [text, setText] = useState();
 
+  const goTo = navigation.navigate;
+
   const { t } = useTranslation();
+
+  function send() {
+    WebSocket.sendPost({ title, text });
+    goTo(Navigation.PostScreen);
+  }
 
   return (
     <Block>
@@ -26,13 +31,10 @@ const AddPostScreen = ({ navigation }) => {
         value={text}
         onChangeText={value => setText(value)}
       />
-      <Block ph="5">
+      <Block ph={5}>
         <Button
           title={t('add')}
-          onPress={() => {
-            sendPost({ title, text });
-            goTo(Navigation.PostScreen);
-          }}
+          onPress={send}
         />
       </Block>
     </Block>

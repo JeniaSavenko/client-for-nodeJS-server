@@ -1,10 +1,6 @@
 import { CREATE_USER, GET_TOKEN, LOGIN_USER } from '../actions/UserActions';
 
-const initialState = {
-  posts: [{ _id: '', title: '', text: '' }],
-};
-
-export function userReducer(state = initialState, action) {
+export function userReducer(state = {}, action) {
   switch (action.type) {
     case CREATE_USER:
       return {

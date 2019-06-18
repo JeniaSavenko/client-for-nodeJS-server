@@ -10,11 +10,11 @@ import { Auth } from '../constants/Auth';
 import { Navigation } from '../constants/Navigation';
 
 const combineRequests = {
-  login: payload => axios.post(`${Auth.url}${Auth.login}`, payload)
+  login: payload => axios.post(`${Auth.mainUrl}${Auth.auth}${Auth.login}`, payload)
     .then(response => response)
     .catch(err => err),
 
-  reg: payload => axios.post(`${Auth.url}${Auth.reg}`, payload)
+  reg: payload => axios.post(`${Auth.mainUrl}${Auth.auth}${Auth.reg}`, payload)
     .then(response => response)
     .catch(err => err),
 };
@@ -43,9 +43,9 @@ function* CreateNewUser(action) {
   }
 }
 
-function* Logout() {
+function Logout() {
   AsyncStorage.removeItem(Auth.userToken);
-  yield put({ type: LOGOUT_USER });
+  put({ type: LOGOUT_USER });
 }
 
 function* actionWatcher() {

@@ -7,14 +7,16 @@ import { Navigation } from '../constants/Navigation';
 const HomeScreen = ({
   navigation,
 }) => {
-  const goTo = navigation.navigate;
+  function goTo(screen) {
+    navigation.navigate(screen);
+  }
 
   const { t } = useTranslation();
 
   return (
     <Block height ac jc>
-      <Block width="60%" mv="10">
-        <Button title={t('login')} onPress={() => goTo('LoginScreen')} />
+      <Block width="60%" mv={10}>
+        <Button title={t('login')} onPress={() => goTo(Navigation.LoginScreen)} />
       </Block>
       <Block width="60%">
         <Button title={t('registration')} onPress={() => goTo(Navigation.CreateUserScreen)} />

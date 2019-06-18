@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import ListItem from '../components/ListItem';
 import Block from '../components/Block';
-import { runSocket } from '../api/socket';
+import { WebSocket } from '../api/socket';
 import HeaderButton from '../components/HeaderButton';
 import LogOutButton from '../components/LogOutButton';
 import { Navigation } from '../constants/Navigation';
@@ -15,7 +15,7 @@ const PostScreen = ({
   navigation,
 }) => {
   useEffect(() => {
-    runSocket();
+    WebSocket.runSocket();
   }, []);
 
   const goTo = navigation.navigate;
@@ -25,7 +25,7 @@ const PostScreen = ({
   const [isLoading, setLoading] = useState(false);
 
   const update = () => {
-    runSocket();
+    WebSocket.runSocket();
     setLoading(false);
   };
 
@@ -33,6 +33,7 @@ const PostScreen = ({
     <ListItem
       title={item.title}
       text={item.text}
+      save={item.updatedAt}
       onPress={() => {
         goTo(Navigation.PostPreviewScreen, {
           post: item,

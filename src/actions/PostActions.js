@@ -1,9 +1,6 @@
 export const GET_POSTS = 'GET_POSTS';
-export const POSTS_SUCCESS = 'POSTS_SUCCESS';
 export const CREATE_POST = 'CREATE_POST';
-export const EDIT_MODE_POST = 'EDIT_MODE_POST';
 export const SAVE_POST = 'SAVE_POST';
-export const POST_NOTES_SUCCESS = 'POST_NOTES_SUCCESS';
 export const DELETE_NOTES_SUCCESS = 'DELETE_NOTES_SUCCESS';
 
 export const getPosts = post => ({
