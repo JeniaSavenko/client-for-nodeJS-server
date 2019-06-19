@@ -1,5 +1,5 @@
 import {
-  GET_POSTS, CREATE_POST, SAVE_POST,
+  GET_POSTS, CREATE_POST, SAVE_POST, START_EDIT, FINISH_EDIT,
 } from '../actions/PostActions';
 
 const savePosts = (posts, { itemId, title, text }) => posts.map(postItem => ({
@@ -22,6 +22,14 @@ export function postReducer(state = {}, action) {
         action,
       };
     case CREATE_POST:
+      return {
+        ...state,
+      };
+    case START_EDIT:
+      return {
+        ...state,
+      };
+    case FINISH_EDIT:
       return {
         ...state,
       };

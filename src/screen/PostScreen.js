@@ -13,16 +13,17 @@ import { Navigation } from '../constants/Navigation';
 const PostScreen = ({
   posts,
   navigation,
+  userName,
 }) => {
   useEffect(() => {
     WebSocket.runSocket();
   }, []);
 
+  const [isLoading, setLoading] = useState(false);
+
   const goTo = navigation.navigate;
 
   const { t } = useTranslation();
-
-  const [isLoading, setLoading] = useState(false);
 
   const update = () => {
     WebSocket.runSocket();
@@ -31,10 +32,13 @@ const PostScreen = ({
 
   const renderItem = ({ item }) => (
     <ListItem
+      editMode={item.editMode}
+      userId={item.editing}
       title={item.title}
       text={item.text}
-      save={item.updatedAt}
+      updatedAt={item.updatedAt}
       onPress={() => {
+        WebSocket.editModeStart(userName, item._id);
         goTo(Navigation.PostPreviewScreen, {
           post: item,
         });
@@ -70,6 +74,7 @@ PostScreen.navigationOptions = {
 
 const mapStateToProps = store => ({
   posts: store.post.posts,
+  userName: store.user.name,
 });
 
 export default connect(mapStateToProps)(PostScreen);

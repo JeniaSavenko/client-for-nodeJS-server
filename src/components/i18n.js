@@ -23,6 +23,8 @@ const resources = {
       ru: 'РУС',
       en: 'EN',
       logout: 'LogOut',
+      lastSave: 'Last Save',
+      nowEditing: 'now editing',
     },
   },
   ru: {
@@ -46,6 +48,8 @@ const resources = {
       ru: 'РУС',
       en: 'EN',
       logout: 'Выход',
+      lastSave: 'Последнее сохранение',
+      nowEditing: 'Сейчас редактирует',
     },
   },
 };

@@ -38,6 +38,7 @@ const PostPreviewScreen = ({ navigation }) => {
 
   function update() {
     WebSocket.updatePost(post._id, title, text);
+    WebSocket.editModeFinish(post._id);
     goTo(Navigation.PostScreen);
   }
   function remove() {

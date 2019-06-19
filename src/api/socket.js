@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { AsyncStorage } from 'react-native';
 import {
-  createPostTitle, getPosts, rmPost, savePost,
+  createPostTitle, finishEdit, getPosts, rmPost, savePost, startEdit,
 } from '../actions/PostActions';
 import { Auth } from '../constants/Auth';
 
@@ -28,6 +28,10 @@ class Socket {
     socket.on('get_post', (post) => {
       store.dispatch(getPosts(post));
     });
+
+    socket.on('edit_mode', (msg) => {
+      store.dispatch(startEdit(msg));
+    });
   };
 
   sendPost = (post) => {
@@ -43,6 +47,17 @@ class Socket {
   updatePost = (id, title, text) => {
     store.dispatch(savePost(id, title, text));
     socket.emit('update_post', { id, title, text });
+  };
+
+  editModeStart = (userId, postId) => {
+    store.dispatch(startEdit(userId, postId));
+    socket.emit('edit_mode_start', { userId, postId });
+  };
+
+  editModeFinish = (postId) => {
+    console.log('finish', postId);
+    store.dispatch(finishEdit(postId));
+    socket.emit('edit_mode_finish', postId);
   };
 }
 
