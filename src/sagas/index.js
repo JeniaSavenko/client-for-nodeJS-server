@@ -36,7 +36,7 @@ function* CreateNewUser(action) {
   const response = yield call(combineRequests.reg, user);
   if (response) {
     yield put({ type: LOGIN_SUCCESS, response });
-    AsyncStorage.setItem(Auth.userToken, response.data.accessToken);
+    AsyncStorage.setItem(Auth.userToken, response.data.token);
     action.navigation.navigate(Navigation.PostScreen);
   } else {
     yield put({ type: ERROR, response });

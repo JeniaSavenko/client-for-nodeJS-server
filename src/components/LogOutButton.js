@@ -7,12 +7,12 @@ import Block from './Block';
 import { logoutUser } from '../actions/UserActions';
 
 const LogOutButton = ({ logout }) => {
-  const { t } = useTranslation();
+  const { t: translate } = useTranslation();
   return (
     <Block width row ac js>
       <Block mh={10}>
         <Button
-          title={t('logout')}
+          title={translate('logout')}
           onPress={() => logout(NavigationActions.navigate)}
         />
       </Block>

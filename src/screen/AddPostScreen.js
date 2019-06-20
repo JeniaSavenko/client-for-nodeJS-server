@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Input } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import Block from '../components/Block';
-import { WebSocket } from '../api/socket';
+import WebSocket from '../api/socket';
 import { Navigation } from '../constants/Navigation';
 
 const AddPostScreen = ({ navigation }) => {

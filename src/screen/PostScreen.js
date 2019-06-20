@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import ListItem from '../components/ListItem';
 import Block from '../components/Block';
-import { WebSocket } from '../api/socket';
+import WebSocket from '../api/socket';
 import HeaderButton from '../components/HeaderButton';
 import LogOutButton from '../components/LogOutButton';
 import { Navigation } from '../constants/Navigation';

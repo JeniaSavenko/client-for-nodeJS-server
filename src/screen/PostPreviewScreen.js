@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Input } from 'react-native-elements';
 import { useTranslation } from 'react-i18next';
 import Block from '../components/Block';
-import { WebSocket } from '../api/socket';
+import WebSocket from '../api/socket';
 import { Style } from '../style';
 import { Navigation } from '../constants/Navigation';
 import ButtonWithIcon from '../components/ButtonWithIcon';
@@ -68,6 +68,11 @@ const PostPreviewScreen = ({ navigation }) => {
       </Block>
     </Block>
   );
+};
+
+PostPreviewScreen.navigationOptions = {
+  title: 'Edit',
+  headerLeft: null,
 };
 
 export default PostPreviewScreen;
