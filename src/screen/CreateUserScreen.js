@@ -13,7 +13,7 @@ const CreateUserScreen = ({
 
   const [userPass, setUserPass] = useState();
 
-  const { t } = useTranslation();
+  const { t: translate } = useTranslation();
 
   function handleUserNameChange(name) {
     setUserName(name);
@@ -30,17 +30,17 @@ const CreateUserScreen = ({
   return (
     <Block height width>
       <Input
-        placeholder={t('userName')}
+        placeholder={translate('userName')}
         value={userName}
         onChangeText={handleUserNameChange}
       />
       <Input
-        placeholder={t('userPass')}
+        placeholder={translate('userPass')}
         value={userPass}
         onChangeText={handleUserPassChange}
       />
       <Button
-        title={t('registration')}
+        title={translate('registration')}
         onPress={onCreateUser}
       />
     </Block>

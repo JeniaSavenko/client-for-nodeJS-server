@@ -12,7 +12,7 @@ const AddPostScreen = ({ navigation }) => {
 
   const goTo = navigation.navigate;
 
-  const { t } = useTranslation();
+  const { t: translate } = useTranslation();
 
   function send() {
     WebSocket.sendPost({ title, text });
@@ -22,18 +22,18 @@ const AddPostScreen = ({ navigation }) => {
   return (
     <Block>
       <Input
-        placeholder={t('title')}
+        placeholder={translate('title')}
         value={title}
         onChangeText={value => setTitle(value)}
       />
       <Input
-        placeholder={t('text')}
+        placeholder={translate('text')}
         value={text}
         onChangeText={value => setText(value)}
       />
       <Block ph={5}>
         <Button
-          title={t('add')}
+          title={translate('add')}
           onPress={send}
         />
       </Block>

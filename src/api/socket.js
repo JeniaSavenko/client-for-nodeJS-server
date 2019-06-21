@@ -6,9 +6,6 @@ import {
 import { Auth } from '../constants/Auth';
 import { SocketConst } from '../constants/Socket';
 
-let socket;
-let store;
-
 class Socket {
   static socket;
 
@@ -27,58 +24,55 @@ class Socket {
     Socket.instance = this;
 
     return this;
-  }
-
+  };
 
   configureSocket = (s) => {
-    store = s;
+    this.store = s;
   };
 
   runSocket = () => {
-    socket = io(this.url, {
+    this.socket = io(this.url, {
       query: {
         token: AsyncStorage.getItem(Auth.userToken),
       },
     });
-    socket.connect();
+    this.socket.connect();
 
-    socket.on(SocketConst.getPost, (post) => {
-      store.dispatch(getPosts(post));
+    this.socket.on(SocketConst.getPost, (post) => {
+      this.store.dispatch(getPosts(post));
     });
 
-    socket.on(SocketConst.editMode, (msg) => {
-      store.dispatch(startEdit(msg));
+    this.socket.on(SocketConst.editMode, (msg) => {
+      this.store.dispatch(startEdit(msg));
     });
   };
 
   sendPost = (post) => {
-    store.dispatch(createPostTitle(post));
-    socket.emit(SocketConst.sendPost, post);
+    this.store.dispatch(createPostTitle(post));
+    this.socket.emit(SocketConst.sendPost, post);
   };
 
   deletePost = (id) => {
-    store.dispatch(rmPost(id));
-    socket.emit(SocketConst.deletePost, id);
+    this.store.dispatch(rmPost(id));
+    this.socket.emit(SocketConst.deletePost, id);
   };
 
   updatePost = (id, title, text) => {
-    store.dispatch(savePost(id, title, text));
-    socket.emit(SocketConst.updatePost, { id, title, text });
+    this.store.dispatch(savePost(id, title, text));
+    this.socket.emit(SocketConst.updatePost, { id, title, text });
   };
 
   editModeStart = (userId, postId) => {
-    store.dispatch(startEdit(userId, postId));
-    socket.emit(SocketConst.editModeStart, { userId, postId });
+    this.store.dispatch(startEdit(userId, postId));
+    this.socket.emit(SocketConst.editModeStart, { userId, postId });
   };
 
   editModeFinish = (postId) => {
-    store.dispatch(finishEdit(postId));
-    socket.emit(SocketConst.editModeFinish, postId);
+    this.store.dispatch(finishEdit(postId));
+    this.socket.emit(SocketConst.editModeFinish, postId);
   };
 }
 
 const WebSocket = new Socket(Auth.mainUrl);
-
-WebSocket.init();
 
 export default WebSocket;

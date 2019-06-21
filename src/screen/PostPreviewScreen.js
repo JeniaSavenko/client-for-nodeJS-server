@@ -24,7 +24,7 @@ const PostPreviewScreen = ({ navigation }) => {
 
   const goTo = navigation.navigate;
 
-  const { t } = useTranslation();
+  const { t: translate } = useTranslation();
 
   useEffect(
     () => {
@@ -49,21 +49,21 @@ const PostPreviewScreen = ({ navigation }) => {
   return (
     <Block>
       <Input
-        placeholder={t('title')}
+        placeholder={translate('title')}
         value={title}
         onChangeText={handleUserTitleChange}
       />
       <Input
-        placeholder={t('text')}
+        placeholder={translate('text')}
         value={text}
         onChangeText={handleUserTextChange}
       />
       <Block row ac jb widht pv="10" ph="5">
         <Block width="48%">
-          <ButtonWithIcon iconName={Style.iconSave} title="save" onPress={update} />
+          <ButtonWithIcon iconName={Style.iconSave} title={translate('save')} onPress={update} />
         </Block>
         <Block width="48%">
-          <ButtonWithIcon iconName={Style.iconTrash} title="delete" onPress={remove} />
+          <ButtonWithIcon iconName={Style.iconTrash} title={translate('delete')} onPress={remove} />
         </Block>
       </Block>
     </Block>

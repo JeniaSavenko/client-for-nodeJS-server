@@ -23,11 +23,18 @@ const PostScreen = ({
 
   const goTo = navigation.navigate;
 
-  const { t } = useTranslation();
+  const { t: translate } = useTranslation();
 
   const update = () => {
     WebSocket.runSocket();
     setLoading(false);
+  };
+
+  const startEdit = (item) => {
+    WebSocket.editModeStart(userName, item._id);
+    goTo(Navigation.PostPreviewScreen, {
+      post: item,
+    });
   };
 
   const renderItem = ({ item }) => (
@@ -37,12 +44,7 @@ const PostScreen = ({
       title={item.title}
       text={item.text}
       updatedAt={item.updatedAt}
-      onPress={() => {
-        WebSocket.editModeStart(userName, item._id);
-        goTo(Navigation.PostPreviewScreen, {
-          post: item,
-        });
-      }}
+      onPress={() => startEdit(item)}
     />
   );
 
@@ -62,7 +64,7 @@ const PostScreen = ({
           renderItem={renderItem}
         />
       </ScrollView>
-      <Button title={t('addPost')} onPress={() => goTo(Navigation.AddPost)} />
+      <Button title={translate('addPost')} onPress={() => goTo(Navigation.AddPost)} />
     </Block>
   );
 };

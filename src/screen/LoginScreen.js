@@ -9,7 +9,7 @@ const LoginScreen = ({
   navigation,
   login,
 }) => {
-  const { t } = useTranslation();
+  const { t: translate } = useTranslation();
 
   const [userName, setUserName] = useState();
 
@@ -30,17 +30,17 @@ const LoginScreen = ({
   return (
     <Block height width>
       <Input
-        placeholder={t('userName')}
+        placeholder={translate('userName')}
         value={userName}
         onChangeText={handleUserNameChange}
       />
       <Input
-        placeholder={t('userPass')}
+        placeholder={translate('userPass')}
         value={userPass}
         onChangeText={handleUserPassChange}
       />
       <Button
-        title={t('login')}
+        title={translate('login')}
         onPress={onLogin}
       />
     </Block>

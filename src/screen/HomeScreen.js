@@ -11,15 +11,15 @@ const HomeScreen = ({
     navigation.navigate(screen);
   }
 
-  const { t } = useTranslation();
+  const { t: translate } = useTranslation();
 
   return (
     <Block height ac jc>
       <Block width="60%" mv={10}>
-        <Button title={t('login')} onPress={() => goTo(Navigation.LoginScreen)} />
+        <Button title={translate('login')} onPress={() => goTo(Navigation.LoginScreen)} />
       </Block>
       <Block width="60%">
-        <Button title={t('registration')} onPress={() => goTo(Navigation.CreateUserScreen)} />
+        <Button title={translate('registration')} onPress={() => goTo(Navigation.CreateUserScreen)} />
       </Block>
     </Block>
   );

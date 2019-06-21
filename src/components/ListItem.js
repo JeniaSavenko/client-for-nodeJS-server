@@ -8,8 +8,7 @@ import { Body, Title } from '../style';
 const ListItem = ({
   title, text, updatedAt, onPress, editMode, userId,
 }) => {
-  const { t } = useTranslation();
-  const newDate = new Date(updatedAt).toISOString().slice(0, 10);
+  const { t: translate } = useTranslation();
   return (
     <TouchableOpacity onPress={!editMode ? onPress : undefined}>
       <Block row ac>
@@ -24,7 +23,7 @@ const ListItem = ({
             && (
             <Block row>
               <Block mr={5}>
-                <Body>{t('nowEditing')}</Body>
+                <Body>{translate('nowEditing')}</Body>
               </Block>
               <Body>{userId}</Body>
             </Block>
@@ -33,10 +32,10 @@ const ListItem = ({
         </Block>
         <Block flex={1} row ae je>
           <Block mr={5}>
-            <Body>{t('lastSave')}</Body>
+            <Body>{translate('lastSave')}</Body>
           </Block>
           <Body>
-            {newDate}
+            {updatedAt}
           </Body>
         </Block>
       </Block>
