@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { persistStore } from 'redux-persist/es/persistStore';
+import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import Navigator from './src/components/Navigator';
 import configureStore from './src/store/configureStore';

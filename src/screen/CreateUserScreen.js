@@ -15,17 +15,17 @@ const CreateUserScreen = ({
 
   const { t: translate } = useTranslation();
 
-  function handleUserNameChange(name) {
+  const handleUserNameChange = (name) => {
     setUserName(name);
-  }
+  };
 
-  function handleUserPassChange(pass) {
+  const handleUserPassChange = (pass) => {
     setUserPass(pass);
-  }
+  };
 
-  function onCreateUser() {
+  const onCreateUser = () => {
     createUser(userName, userPass, navigation);
-  }
+  };
 
   return (
     <Block height width>
