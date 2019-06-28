@@ -5,6 +5,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const ERROR = 'ERROR';
 export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const CHOOSE_ROOM = 'CHOOSE_ROOM';
+export const ADD_USER = 'ADD_USER';
 
 
 export const loginUser = (name, password, navigation) => ({
@@ -12,6 +14,16 @@ export const loginUser = (name, password, navigation) => ({
   name,
   password,
   navigation,
+});
+
+export const chooseRoom = name => ({
+  type: CHOOSE_ROOM,
+  name,
+});
+
+export const addUserInRoom = name => ({
+  type: ADD_USER,
+  name,
 });
 
 export const regNewUser = (name, password, navigation) => ({

@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import Markdown from 'react-native-markdown-package';
 import Block from './Block';
-import { Body, Title } from '../style';
-
+import { Body, MarkdownStyle } from '../style';
 
 const ListItem = ({
   title, text, updatedAt, onPress, editMode, userId,
@@ -11,14 +11,13 @@ const ListItem = ({
   const { t: translate } = useTranslation();
   return (
     <TouchableOpacity onPress={!editMode ? onPress : undefined}>
-      <Block row ac>
-        <Block flex={1} pv={5} mr={50}>
-          <Title>
+      <Block row ac js>
+        <Block pv={5}>
+          <Markdown styles={MarkdownStyle.markdown}>
             {title}
-          </Title>
-          <Body>
+            {'\n'}
             {text}
-          </Body>
+          </Markdown>
           {editMode
             && (
             <Block row>
@@ -42,5 +41,6 @@ const ListItem = ({
     </TouchableOpacity>
   );
 };
+
 
 export default ListItem;

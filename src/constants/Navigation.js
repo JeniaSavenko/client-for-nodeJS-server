@@ -5,4 +5,6 @@ export const Navigation = {
   PostScreen: 'PostScreen',
   PostPreviewScreen: 'PostPreviewScreen',
   AddPost: 'AddPost',
+  ChooseRoomScreen: 'ChooseRoomScreen',
+  AddUserScreen: 'AddUserScreen',
 };

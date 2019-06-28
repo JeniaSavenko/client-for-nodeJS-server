@@ -1,10 +1,10 @@
 import io from 'socket.io-client';
-import { AsyncStorage } from 'react-native';
 import {
   createPostTitle, finishEdit, getPosts, rmPost, savePost, startEdit,
 } from '../actions/PostActions';
 import { Auth } from '../constants/Auth';
 import { SocketConst } from '../constants/Socket';
+import { addUserInRoom, chooseRoom } from '../actions/UserActions';
 
 class Socket {
   static socket;
@@ -31,12 +31,9 @@ class Socket {
   };
 
   runSocket = () => {
-    this.socket = io(this.url, {
-      query: {
-        token: AsyncStorage.getItem(Auth.userToken),
-      },
-    });
+    this.socket = io(this.url);
     this.socket.connect();
+
 
     this.socket.on(SocketConst.getPost, (post) => {
       this.store.dispatch(getPosts(post));
@@ -47,9 +44,26 @@ class Socket {
     });
   };
 
-  sendPost = (post) => {
+  sendPost = (post, room) => {
+    const item = { title: post.title, text: post.text, roomName: room };
     this.store.dispatch(createPostTitle(post));
-    this.socket.emit(SocketConst.sendPost, post);
+    this.socket.emit(SocketConst.sendPost, item);
+  };
+
+  chooseRoom = (name, userName) => {
+    this.store.dispatch(chooseRoom(name));
+    this.socket.emit('join_room', ({ name, userName }));
+    this.socket.on(SocketConst.getPost, (post) => {
+      this.store.dispatch(getPosts(post));
+    });
+  };
+
+  addUserInRoom = (roomName, userName) => {
+    this.store.dispatch(addUserInRoom(userName));
+    this.socket.emit('add_user', ({ roomName, userName }));
+    this.socket.on(SocketConst.getPost, (post) => {
+      this.store.dispatch(getPosts(post));
+    });
   };
 
   deletePost = (id) => {

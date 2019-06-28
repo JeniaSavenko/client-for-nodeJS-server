@@ -22,7 +22,7 @@ export const savePost = (itemId, title, text) => ({
   text,
 });
 
-export const createPostTitle = (title, text) => ({
+export const createPostTitle = ({ title, text }) => ({
   type: CREATE_POST,
   title,
   text,

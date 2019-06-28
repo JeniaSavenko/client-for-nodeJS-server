@@ -1,4 +1,6 @@
 import {
+  ADD_USER,
+  CHOOSE_ROOM,
   CREATE_USER, GET_TOKEN, LOGIN_USER, LOGOUT_USER, LOGOUT_USER_SUCCESS,
 } from '../actions/UserActions';
 
@@ -14,6 +16,15 @@ export function userReducer(state = {}, action) {
         ...state,
         name: action.name,
         logged: true,
+      };
+    case CHOOSE_ROOM:
+      return {
+        ...state,
+        roomName: action.name,
+      };
+    case ADD_USER:
+      return {
+        ...state,
       };
     case LOGOUT_USER_SUCCESS:
       return {

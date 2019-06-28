@@ -64,6 +64,7 @@ const PostScreen = ({
           renderItem={renderItem}
         />
       </ScrollView>
+      <Button title={translate('addUser')} onPress={() => goTo(Navigation.AddUserScreen)} />
       <Button title={translate('addPost')} onPress={() => goTo(Navigation.AddPost)} />
     </Block>
   );

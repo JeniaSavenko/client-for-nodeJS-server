@@ -24,7 +24,7 @@ function* Login(action) {
   if (response.data) {
     yield put({ type: LOGIN_SUCCESS, response });
     yield put({ type: GET_TOKEN, token: response.data.accessToken });
-    action.navigation.navigate(Navigation.PostScreen);
+    action.navigation.navigate(Navigation.ChooseRoomScreen);
   } else {
     yield put({ type: ERROR, response });
   }

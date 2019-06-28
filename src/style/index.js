@@ -24,3 +24,25 @@ export const Style = {
   iconSave: 'ios-save',
   iconTrash: 'ios-trash',
 };
+
+
+export const MarkdownStyle = {
+  markdown: {
+    heading1: {
+      color: 'red',
+    },
+    heading2: {
+      color: 'green',
+    },
+    strong: {
+      color: 'red',
+      fontWeight: 'bold',
+    },
+    em: {
+      color: 'cyan',
+    },
+    text: {
+      color: 'black',
+    },
+  },
+};
