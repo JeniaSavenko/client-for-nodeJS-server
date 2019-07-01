@@ -6,9 +6,8 @@ import { useTranslation } from 'react-i18next';
 import ListItem from '../components/ListItem';
 import Block from '../components/Block';
 import WebSocket from '../api/socket';
-import HeaderButton from '../components/HeaderButton';
-import LogOutButton from '../components/LogOutButton';
 import { Navigation } from '../constants/Navigation';
+import { logoutUser } from '../actions/UserActions';
 
 const PostScreen = ({
   posts,
@@ -64,20 +63,21 @@ const PostScreen = ({
           renderItem={renderItem}
         />
       </ScrollView>
+      <Button title={translate('chooseRoom')} onPress={() => goTo(Navigation.ChooseRoomScreen)} />
       <Button title={translate('addUser')} onPress={() => goTo(Navigation.AddUserScreen)} />
       <Button title={translate('addPost')} onPress={() => goTo(Navigation.AddPost)} />
     </Block>
   );
 };
 
-PostScreen.navigationOptions = {
-  headerTitle: <HeaderButton />,
-  headerLeft: <LogOutButton />,
-};
-
 const mapStateToProps = store => ({
   posts: store.post.posts,
   userName: store.user.name,
+
 });
 
-export default connect(mapStateToProps)(PostScreen);
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutUser()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostScreen);
