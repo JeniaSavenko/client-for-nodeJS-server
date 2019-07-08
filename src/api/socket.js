@@ -52,7 +52,7 @@ class Socket {
 
   chooseRoom = (name, userName) => {
     this.store.dispatch(chooseRoom(name));
-    this.socket.emit('join_room', ({ name, userName }));
+    this.socket.emit(SocketConst.joinRoom, ({ name, userName }));
     this.socket.on(SocketConst.getPost, (post) => {
       this.store.dispatch(getPosts(post));
     });
@@ -60,10 +60,7 @@ class Socket {
 
   addUserInRoom = (roomName, userName) => {
     this.store.dispatch(addUserInRoom(userName));
-    this.socket.emit('add_user', ({ roomName, userName }));
-    this.socket.on(SocketConst.getPost, (post) => {
-      this.store.dispatch(getPosts(post));
-    });
+    this.socket.emit(SocketConst.addUser, ({ roomName, userName }));
   };
 
   deletePost = (id) => {

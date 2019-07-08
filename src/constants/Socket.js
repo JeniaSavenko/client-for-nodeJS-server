@@ -6,4 +6,6 @@ export const SocketConst = {
   updatePost: 'update_post',
   editModeStart: 'edit_mode_start',
   editModeFinish: 'edit_mode_finish',
+  joinRoom: 'join_room',
+  addUser: 'add_user',
 };
